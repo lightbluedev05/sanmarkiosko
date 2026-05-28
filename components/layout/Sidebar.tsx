@@ -5,7 +5,7 @@ import { Home, ShoppingBag, PlusSquare, User, Search, Settings, HelpCircle, LogO
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 const navItems = [
   { icon: Home, label: "Inicio", href: "/" },
@@ -19,8 +19,7 @@ const secondaryItems = [
   { icon: HelpCircle, label: "Ayuda", href: "/ayuda" },
 ];
 
-export function Sidebar() {
-  const pathname = usePathname();
+function SidebarSearch() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState(searchParams.get("q") || "");
@@ -42,6 +41,22 @@ export function Sidebar() {
   };
 
   return (
+    <div className="relative mb-6">
+      <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+      <Input
+        placeholder="¿Qué buscas hoy?"
+        value={searchValue}
+        onChange={handleChange}
+        className="h-11 w-full rounded-2xl border-2 bg-background pl-10 text-sm font-bold transition-all focus:ring-4 focus:ring-primary/10"
+      />
+    </div>
+  );
+}
+
+export function Sidebar() {
+  const pathname = usePathname();
+
+  return (
     <aside className="hidden h-full w-72 shrink-0 flex-col border-r bg-card md:flex sidebar-gradient">
       <div className="flex h-20 items-center px-8 shrink-0">
         <Link href="/" className="flex items-center gap-3">
@@ -56,15 +71,9 @@ export function Sidebar() {
       
       <div className="flex-1 overflow-y-auto py-4 px-6 scrollbar-hide">
         <div className="mb-6">
-          <div className="relative mb-6">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="¿Qué buscas hoy?"
-              value={searchValue}
-              onChange={handleChange}
-              className="h-11 w-full rounded-2xl border-2 bg-background pl-10 text-sm font-bold transition-all focus:ring-4 focus:ring-primary/10"
-            />
-          </div>
+          <Suspense>
+            <SidebarSearch />
+          </Suspense>
           
           <nav className="space-y-1">
             <p className="mb-3 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50">
