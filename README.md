@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sanmarkiosko 🎓🛒
 
-## Getting Started
+Sanmarkiosko es el mercado oficial diseñado por y para estudiantes de la Universidad Nacional Mayor de San Marcos (UNMSM). Esta plataforma facilita el intercambio, compra y venta de productos y servicios dentro de la comunidad universitaria de forma segura y eficiente.
 
-First, run the development server:
+## 🚀 Características Principales
+
+- **Feed de Productos:** Explora anuncios categorizados (Académico, Comida, Tecnología, etc.).
+- **Anuncios Destacados:** Sistema de "Boost" para mayor visibilidad de productos importantes.
+- **Gestión de Actividad:** Panel para seguir tus ventas activas e historial de compras.
+- **Perfiles Estudiantiles:** Identificación clara de los vendedores de la comunidad.
+- **Diseño Moderno:** Interfaz rápida, intuitiva y optimizada para dispositivos móviles y escritorio.
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Framework:** [Next.js 15+](https://nextjs.org/) (App Router)
+- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
+- **Estilos:** [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **Componentes UI:** [Base UI](https://base-ui.com/) & [Lucide React](https://lucide.dev/) (iconos)
+- **Fuentes:** Geist Sans & Geist Mono
+
+## 🏁 Cómo empezar
+
+Sigue estos pasos para ejecutar el proyecto localmente en tu máquina.
+
+### Requisitos previos
+
+- [Node.js](https://nodejs.org/) (versión 18 o superior recomendada)
+- npm o yarn
+
+### Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/sanmarkiosko.git
+   cd sanmarkiosko
+   ```
+
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+### Ejecución en desarrollo
+
+Inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Estructura del Proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/`: Rutas y páginas principales de la aplicación.
+- `components/`: Componentes reutilizables de la interfaz (layout, feed, ui).
+- `lib/`: Utilidades y datos dummy para el prototipado.
+- `public/`: Archivos estáticos como imágenes y logos.
+- `resources/`: Recursos gráficos adicionales.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Desarrollado con ❤️ para la comunidad sanmarquina.
