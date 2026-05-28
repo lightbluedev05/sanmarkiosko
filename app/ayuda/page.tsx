@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldCheck, HelpCircle as HelpIcon, MessageCircle, ArrowLeft, ChevronRight, AlertTriangle } from "lucide-react";
+import { ShieldCheck, HelpCircle as HelpIcon, MessageCircle, ArrowLeft, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
