@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Conecta con otros estudiantes para comprar y vender productos y servicios en el campus.",
 };
 
+import { Suspense } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 
 export default function RootLayout({
@@ -30,7 +31,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background font-sans text-foreground">
-        <DashboardLayout>{children}</DashboardLayout>
+        <Suspense fallback={null}>
+          <DashboardLayout>{children}</DashboardLayout>
+        </Suspense>
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Navbar } from "./Navbar";
 import { BottomNav } from "./BottomNav";
 import { Sidebar } from "./Sidebar";
@@ -10,7 +11,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background">
       {/* Desktop Sidebar */}
-      <Sidebar />
+      <Suspense fallback={<div className="w-72 border-r bg-card hidden md:block" />}>
+        <Sidebar />
+      </Suspense>
       
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Mobile Top Navbar */}
