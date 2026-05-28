@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingBag, ArrowLeft, Package, History, Heart, ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowLeft, Package, History, Heart, ArrowRight } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";

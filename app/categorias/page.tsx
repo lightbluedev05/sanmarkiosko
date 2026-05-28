@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Tag, ArrowLeft } from "lucide-react";
+import { Grid, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/data";
 import Link from "next/link";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, Suspense } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { PlusSquare, Info, X } from "lucide-react";
 import { CategoryPills } from "@/components/feed/CategoryPills";
@@ -51,10 +52,12 @@ function HomeContent() {
         <section className="relative overflow-hidden rounded-[2.5rem] bg-primary p-8 text-primary-foreground border border-primary/10 md:p-12 min-h-[300px] flex items-center">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
-            <img
+            <Image
               src="/images/banner_sanmarkiosko.webp"
               alt="San Marcos Background"
               className="h-full w-full object-cover"
+              fill
+              priority
             />
             <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
@@ -95,7 +98,7 @@ function HomeContent() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-black tracking-tight">
-                Resultados para <span className="text-primary">"{searchQuery}"</span>
+                Resultados para <span className="text-primary">&quot;{searchQuery}&quot;</span>
               </h1>
               <Button
                 variant="ghost"

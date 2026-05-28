@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { User, Settings, CreditCard, Bell, Shield, ArrowLeft, Camera, GraduationCap, Building2, Calendar, FileText } from "lucide-react";
+import { CreditCard, Bell, Shield, ArrowLeft, Camera, GraduationCap, Building2, Calendar, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -126,7 +125,7 @@ export default function PerfilPage() {
                   <h3 className="text-sm font-black uppercase tracking-wider text-muted-foreground">Descripción</h3>
                 </div>
                 <p className="text-base font-medium leading-relaxed text-muted-foreground/90 bg-muted/20 p-5 rounded-2xl italic border-l-4 border-primary">
-                  "{profile.bio}"
+                  &quot;{profile.bio}&quot;
                 </p>
               </div>
 

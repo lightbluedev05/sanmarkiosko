@@ -1,6 +1,6 @@
 "use client";
 
-import { Settings, User, Bell, Shield, Lock, Smartphone, Globe, ArrowLeft, ChevronRight } from "lucide-react";
+import { User, Bell, Shield, Lock, Smartphone, Globe, ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
