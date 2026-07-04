@@ -1,6 +1,14 @@
 import { Category, Listing } from "./data";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const getApiBase = () => {
+  let url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+  if (url && !url.endsWith("/api")) {
+    url = url.endsWith("/") ? `${url}api` : `${url}/api`;
+  }
+  return url;
+};
+
+const API_BASE = getApiBase();
 
 /**
  * Obtiene el token JWT del almacenamiento local
