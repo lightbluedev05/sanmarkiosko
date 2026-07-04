@@ -1,34 +1,58 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useMemo, Suspense, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { PlusSquare, Info, X } from "lucide-react";
 import { CategoryPills } from "@/components/feed/CategoryPills";
 import { ListingCard } from "@/components/feed/ListingCard";
-import { DUMMY_LISTINGS, Category } from "@/lib/data";
+import { Category, Listing } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { useSearchParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { api } from "@/lib/api";
 
 function HomeContent() {
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  
   const searchParams = useSearchParams();
   const router = useRouter();
   const searchQuery = searchParams.get("q") || "";
 
-  const filteredListings = useMemo(() => {
-    return DUMMY_LISTINGS.filter((listing) => {
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(listing.category);
-      const matchesSearch = listing.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        listing.category.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    }).sort((a, b) => {
-      if (a.isBoosted && !b.isBoosted) return -1;
-      if (!a.isBoosted && b.isBoosted) return 1;
-      return 0;
-    });
-  }, [selectedCategories, searchQuery]);
+  // Cargar anuncios del backend
+  const loadListings = async () => {
+    setLoading(true);
+    try {
+      // Pedimos los anuncios al backend con el filtro de búsqueda opcional
+      const res = await api.listings.getAll({
+        q: searchQuery || undefined,
+        // Si hay exactamente 1 categoría seleccionada, la filtramos en el backend
+        category: selectedCategories.length === 1 ? selectedCategories[0] : undefined,
+      });
+
+      if (res.success) {
+        let fetchedData = res.data;
+        // Si hay más de una categoría seleccionada, filtramos el excedente localmente
+        if (selectedCategories.length > 1) {
+          fetchedData = fetchedData.filter((listing) =>
+            selectedCategories.includes(listing.category)
+          );
+        }
+        setListings(fetchedData);
+      }
+    } catch (error) {
+      console.error("Error al cargar anuncios de la API:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Cargar anuncios al cambiar filtros o búsqueda
+  useEffect(() => {
+    loadListings();
+  }, [searchQuery, selectedCategories]);
 
   const toggleCategory = (category: Category) => {
     setSelectedCategories(prev =>
@@ -41,7 +65,7 @@ function HomeContent() {
   const isSearching = searchQuery.length > 0;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 animate-in fade-in duration-500">
       {/* Welcome Header Container with Smooth Transitions */}
       <div
         className={cn(
@@ -167,15 +191,19 @@ function HomeContent() {
               {isSearching ? "Anuncios encontrados" : "Novedades para ti"}
             </h2>
             <p className="text-sm text-muted-foreground font-medium">
-              Mostrando {filteredListings.length} {filteredListings.length === 1 ? 'anuncio' : 'anuncios'}
+              Mostrando {listings.length} {listings.length === 1 ? 'anuncio' : 'anuncios'}
             </p>
           </div>
         </div>
 
-        {filteredListings.length > 0 ? (
+        {loading ? (
+          <div className="flex h-64 items-center justify-center font-bold text-muted-foreground animate-pulse">
+            Cargando anuncios del campus...
+          </div>
+        ) : listings.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 transition-all">
-            {filteredListings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
+            {listings.map((listing) => (
+              <ListingCard key={listing.id} listing={listing} onRefresh={loadListings} />
             ))}
           </div>
         ) : (
@@ -186,8 +214,11 @@ function HomeContent() {
             <h3 className="text-2xl font-black text-foreground">No hay resultados</h3>
             <Button
               variant="outline"
-              className="mt-8 rounded-xl border-2 font-black"
-              onClick={() => router.push("/")}
+              className="mt-8 rounded-xl border-2 font-black cursor-pointer"
+              onClick={() => {
+                setSelectedCategories([]);
+                router.push("/");
+              }}
             >
               Restablecer todo
             </Button>

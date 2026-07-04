@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 import { Suspense } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { AuthProvider } from "@/lib/AuthContext";
 
 export default function RootLayout({
   children,
@@ -32,7 +33,9 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background font-sans text-foreground">
         <Suspense fallback={null}>
-          <DashboardLayout>{children}</DashboardLayout>
+          <AuthProvider>
+            <DashboardLayout>{children}</DashboardLayout>
+          </AuthProvider>
         </Suspense>
       </body>
     </html>

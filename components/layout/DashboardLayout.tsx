@@ -1,4 +1,7 @@
+"use client";
+
 import { Suspense } from "react";
+import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 import { BottomNav } from "./BottomNav";
 import { Sidebar } from "./Sidebar";
@@ -8,6 +11,18 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
+  const pathname = usePathname();
+  const isLoginPage = pathname === "/login";
+
+  // Si estamos en la página de inicio de sesión, no mostrar los marcos del Dashboard
+  if (isLoginPage) {
+    return (
+      <div className="min-h-screen w-full bg-background flex items-center justify-center p-4">
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background">
       {/* Desktop Sidebar */}

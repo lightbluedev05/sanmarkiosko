@@ -15,6 +15,10 @@ export interface Listing {
   isPro: boolean;
   isBoosted: boolean;
   imageUrl?: string;
+  status?: string;
+  seller_id?: string;
+  type?: "Producto" | "Servicio";
+  stock?: number;
 }
 
 export const CATEGORIES: Category[] = [

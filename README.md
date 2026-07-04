@@ -10,7 +10,7 @@ Sanmarkiosko es el mercado oficial diseñado por y para estudiantes de la Univer
 - **Perfiles Estudiantiles:** Identificación clara de los vendedores de la comunidad.
 - **Diseño Moderno:** Interfaz rápida, intuitiva y optimizada para dispositivos móviles y escritorio.
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas 
 
 - **Framework:** [Next.js 15+](https://nextjs.org/) (App Router)
 - **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
